@@ -1,0 +1,1157 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Santa Brígida · 15 oraciones</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#070d1a">
+
+<style>
+    :root{
+      --bg:#070d1a;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.04);
+      --line: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --accent:#66f2c2;
+      --accent2:#7aa7ff;
+      --danger:#ff6b6b;
+      --radius: 18px;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --shadow2: 0 10px 28px rgba(0,0,0,.35);
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: var(--text);
+      background:
+        radial-gradient(1100px 700px at 10% 0%, rgba(122,167,255,.22), transparent 60%),
+        radial-gradient(900px 700px at 90% 10%, rgba(102,242,194,.16), transparent 55%),
+        radial-gradient(900px 700px at 50% 110%, rgba(255,107,107,.12), transparent 60%),
+        var(--bg);
+    }
+    header{
+      position: sticky;
+      top:0;
+      z-index: 10;
+      padding: 18px 16px 12px;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(to bottom, rgba(7,13,26,.92), rgba(7,13,26,.35));
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    h1{
+      margin:0;
+      text-align:center;
+      font-size: 20px;
+      letter-spacing:.2px;
+      font-weight: 900;
+    }
+    .sub{
+      text-align:center;
+      margin-top:6px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height:1.35;
+    }
+    .wrap{ max-width: 1120px; margin:0 auto; padding: 16px; }
+
+    .tabs{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .tab{
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      cursor:pointer;
+      font-weight: 900;
+      box-shadow: var(--shadow2);
+      transition: transform .12s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .tab:hover{ transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.16); }
+    .tab.active{
+      color: rgba(0,0,0,.85);
+      border-color: transparent;
+      background: linear-gradient(135deg, rgba(102,242,194,.95), rgba(122,167,255,.90));
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hd{
+      padding: 14px 14px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .bd{ padding: 14px; }
+
+    .title{ font-weight: 1000; letter-spacing:.2px; }
+    .muted{ color: var(--muted); }
+    .hint{
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+      margin-top: 10px;
+    }
+
+    button{
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      cursor:pointer;
+      font-weight: 900;
+      box-shadow: var(--shadow2);
+      transition: transform .12s ease, background .2s ease, border-color .2s ease, opacity .2s ease;
+    }
+    button:hover{ transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+    button:disabled{ opacity:.55; cursor:not-allowed; transform:none; }
+
+    button.primary{
+      background: linear-gradient(135deg, rgba(102,242,194,.95), rgba(122,167,255,.90));
+      color: rgba(0,0,0,.85);
+      border-color: transparent;
+    }
+    button.danger{
+      background: rgba(255,107,107,.12);
+      border-color: rgba(255,107,107,.28);
+    }
+
+    .btnrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
+
+    .pill{
+      display:inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      white-space:nowrap;
+    }
+    .pill.ok{ border-color: rgba(102,242,194,.30); background: rgba(102,242,194,.12); color: rgba(102,242,194,.95); }
+    .pill.late{ border-color: rgba(122,167,255,.28); background: rgba(122,167,255,.12); color: rgba(122,167,255,.95); }
+
+    .readerTitle{ margin: 0; font-size: 20px; font-weight: 1000; }
+    .readerMeta{ margin-top:6px; font-size: 13px; color: var(--muted); min-height: 18px; }
+    .readerText{
+      margin-top: 12px;
+      white-space: pre-wrap;
+      line-height: 1.7;
+      font-size: 15px;
+      color: rgba(255,255,255,.88);
+    }
+    .sep{ height:1px; background: rgba(255,255,255,.08); margin: 12px 0; }
+
+    /* Calendar */
+    .calTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .monthTitle{
+      font-weight: 1000;
+      font-size: 18px;
+      text-align:center;
+      min-width: 220px;
+    }
+    .dow{
+      display:grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+      padding: 0 4px;
+    }
+    .dow div{
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 900;
+      padding: 0 6px;
+    }
+    .calendarGrid{
+      display:grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .dayCell{
+      min-height: 72px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding: 12px;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+      transition: transform .12s ease, background .2s ease, border-color .2s ease;
+    }
+    .dayCell:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.18);
+    }
+    .dayCell.muted{
+      opacity:.25;
+      cursor:default;
+    }
+    .dayCell.today{
+      border-color: rgba(122,167,255,.45);
+      box-shadow: 0 0 0 4px rgba(122,167,255,.14);
+    }
+    .dayNum{
+      font-weight: 1000;
+      font-size: 14px;
+    }
+    .dayTag{
+      position:absolute;
+      right: 10px; top: 10px;
+      font-size: 11px;
+      font-weight: 1000;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+    }
+    .dayTag.ok{
+      border-color: rgba(102,242,194,.30);
+      background: rgba(102,242,194,.12);
+      color: rgba(102,242,194,.95);
+    }
+    .dayTag.late{
+      border-color: rgba(122,167,255,.28);
+      background: rgba(122,167,255,.12);
+      color: rgba(122,167,255,.95);
+    }
+    .dayTag.miss{
+      border-color: rgba(255,107,107,.30);
+      background: rgba(255,107,107,.12);
+      color: rgba(255,107,107,.95);
+    }
+
+    /* Modal (sin transparencia rara) */
+    .modalBg{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.72);
+      display:none;
+      align-items:center; justify-content:center;
+      padding: 18px;
+      z-index: 30;
+      backdrop-filter: blur(10px);
+    }
+    .modal{
+      width: min(900px, 100%);
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(10,14,26,.96);
+      box-shadow: 0 25px 90px rgba(0,0,0,.75);
+      overflow:hidden;
+    }
+    .mhd{
+      padding: 14px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      background: rgba(255,255,255,.03);
+    }
+    .mbd{ padding: 14px; }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+
+    .grid15{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+    @media (max-width: 700px){
+      .grid15{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    .pchip{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      border-radius: 14px;
+      padding: 10px 10px;
+      cursor:pointer;
+      font-weight: 1000;
+      text-align:center;
+      user-select:none;
+      transition: transform .12s ease, background .2s ease, border-color .2s ease;
+    }
+    .pchip:hover{ transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+    .pchip.on{
+      color: rgba(0,0,0,.84);
+      border-color: transparent;
+      background: linear-gradient(135deg, rgba(102,242,194,.95), rgba(122,167,255,.90));
+    }
+
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; }
+
+    /* Progreso más visual */
+    .stats{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .stat{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: var(--shadow2);
+    }
+    .stat.big{ grid-column: span 2; }
+    .statLabel{
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 900;
+    }
+    .statValue{
+      margin-top: 6px;
+      font-size: 18px;
+      font-weight: 1000;
+    }
+
+    .todayMeter{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: 140px 1fr;
+      gap: 12px;
+      align-items:center;
+    }
+    @media (max-width: 980px){
+      .todayMeter{ grid-template-columns: 1fr; }
+      .todayMeter .meterRing{ margin: 0 auto; }
+    }
+
+    .meterRing{
+      width: 140px;
+      height: 140px;
+      border-radius: 999px;
+      background: conic-gradient(var(--accent) 0deg, rgba(255,255,255,.10) 0deg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .meterInner{
+      width: 108px;
+      height: 108px;
+      border-radius: 999px;
+      background: rgba(7,13,26,.75);
+      border: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+    .meterNum{
+      font-size: 34px;
+      font-weight: 1000;
+      line-height: 1;
+    }
+    .meterSub{
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 900;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <h1>Santa Brígida · 15 oraciones</h1>
+  <div class="sub">
+    Reto de <b>365 días seguidos</b>. Cada día cuenta solo si completas <b>las 15</b>.
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" id="tabHoy">Hoy</div>
+    <div class="tab" id="tabCal">Calendario</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HOY -->
+  <section id="viewHoy">
+    <div class="grid">
+      <section class="card">
+        <div class="hd">
+          <div>
+            <div class="title">Lectura</div>
+            <div class="muted" id="todayLine">—</div>
+          </div>
+          <div class="pill" id="pillState">—</div>
+        </div>
+
+        <div class="bd">
+          <h2 class="readerTitle" id="prayerTitle">—</h2>
+          <div class="readerMeta" id="prayerMeta"></div>
+          <div class="readerText" id="prayerText">—</div>
+
+          <div class="sep"></div>
+
+          <div class="btnrow">
+            <button id="prev">◀ Anterior</button>
+            <button id="toggle" class="primary">Marcar esta oración</button>
+            <button id="next">Siguiente ▶</button>
+          </div>
+
+          <div class="btnrow">
+            <button id="markDay" class="primary">✅ Marcar HOY como completo (15/15)</button>
+            <button id="clearToday">Reiniciar marcas de HOY</button>
+          </div>
+
+          <div class="hint">
+            📌 Solo cuando tengas <b>15/15</b>, marca el día como completo.
+          </div>
+        </div>
+      </section>
+
+      <aside class="card">
+        <div class="hd">
+          <div class="title">Progreso</div>
+          <div class="pill" id="pillProgress">—</div>
+        </div>
+
+        <div class="bd">
+
+          <div class="stats">
+            <div class="stat">
+              <div class="statLabel">Inicio</div>
+              <div class="statValue mono" id="startDate">—</div>
+            </div>
+
+            <div class="stat">
+              <div class="statLabel">Racha</div>
+              <div class="statValue"><span id="streak">0</span><span class="muted">/365</span></div>
+            </div>
+
+            <div class="stat big">
+              <div class="statLabel">Hoy</div>
+              <div class="statValue"><span id="todayCount">0</span><span class="muted">/15</span></div>
+            </div>
+          </div>
+
+          <div class="todayMeter" aria-label="Progreso de hoy">
+            <div class="meterRing" id="meterRing">
+              <div class="meterInner">
+                <div class="meterNum" id="meterNum">0</div>
+                <div class="meterSub">de 15</div>
+              </div>
+            </div>
+
+            <div class="meterText">
+              <div class="title" style="margin-bottom:6px;">Objetivo de hoy</div>
+              <div class="muted" id="meterMsg">—</div>
+
+              <div class="btnrow" style="margin-top:10px;">
+                <button id="goCal">Ir al calendario</button>
+                <button id="resetAll" class="danger">Reiniciar reto</button>
+              </div>
+
+              <div class="hint">
+                En el calendario, cada día es solo <b>✅ Hecho</b> o <b>Falta</b>.
+                Solo en <b>HOY</b> se marcan las 15 oraciones una por una.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- CALENDARIO -->
+  <section id="viewCal" style="display:none;">
+    <section class="card">
+      <div class="hd">
+        <div>
+          <div class="title">Calendario</div>
+          <div class="muted" id="monthSummary">—</div>
+        </div>
+
+        <div class="calTop">
+          <div class="row">
+            <button id="calPrev">◀</button>
+            <div class="monthTitle" id="calTitle">—</div>
+            <button id="calNext">▶</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bd">
+        <div class="dow" id="dow"></div>
+        <div class="calendarGrid" id="calGrid"></div>
+        <div class="hint">Rango visible: <b>1 año atrás</b> y <b>1 año adelante</b> desde hoy.</div>
+      </div>
+    </section>
+  </section>
+
+</main>
+
+<!-- MODAL -->
+<div class="modalBg" id="modalBg" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="mhd">
+      <div class="title" id="modalTitle">Día</div>
+      <button id="modalClose">Cerrar</button>
+    </div>
+    <div class="mbd">
+      <div class="row">
+        <div class="pill"><b>Fecha:</b> <span class="mono" id="modalDate">—</span></div>
+        <div class="pill"><b>Estado:</b> <span id="modalState">—</span></div>
+        <div class="pill"><b>Registrado:</b> <span class="mono" id="modalReg">—</span></div>
+      </div>
+
+      <div class="btnrow">
+        <button class="primary" id="modalMarkFull">✅ Marcar día completo</button>
+        <button id="modalClear">Quitar marca del día</button>
+      </div>
+
+      <div id="onlyTodayBlock" style="margin-top:12px;">
+        <div class="sep"></div>
+        <div class="title">HOY: marcar oraciones (1–15)</div>
+        <div class="grid15" id="grid15"></div>
+        <div class="hint">Estas marcas son solo para ayudarte a completar HOY. El reto cuenta cuando marcas el día completo.</div>
+      </div>
+
+      <div id="notTodayHint" class="pill" style="display:none; margin-top:12px;">
+        Este día <b>no</b> se marca por oraciones. Solo puede estar ✅ Hecho (15/15) o Falta.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /**********************
+   * INTRO (ANTES DE TODO) — SIN CREDO COMPLETO
+   **********************/
+  const INTRO = {
+    title: "ORACIONES",
+    text: `Para empezar, invoquemos al Dulce Huésped de nuestras almas.
+
+Señal de la Cruz.
+
+Venid, Espíritu Santo, llenad los corazones de Vuestros fieles y encended en ellos el Fuego Eterno de Vuestro Amor. Enviad, Señor, Vuestro Espíritu, y todo será creado, y se renovará la faz de la Tierra.
+
+Oremos:
+
+¡Oh, Dios!, que instruisteis los corazones de Vuestros fieles con la Luz de Vuestro Espíritu Santo, concededme que, animado y guiado por este mismo Espíritu, aprenda a obrar rectamente siempre y goce de la Dulzura del Bien de Vuestros Divinos Consuelos. Por Cristo, nuestro Señor.
+
+Así sea.
+
+Credo (de los Apóstoles).`
+  };
+
+  /**********************
+   * 15 ORACIONES (COMPLETAS)
+   **********************/
+  const PRAYERS = [
+    { key:"p1", title:"PRIMERA ORACIÓN", text:`¡Oh, Jesús mío!, ¡oh, Eterna Dulzura para los que Os amamos!, ¡oh, Gozo Supremo, que supera todo gozo y deseo!, ¡oh, Salvación y Esperanza nuestra!, infinitas pruebas nos habéis dado de que Vuestro mayor Deseo es estar siempre con nosotros, y fue este Sublime Deseo, ¡oh, Bendito Amor!, el que Os llevó a asumir la naturaleza humana. ¡Oh, Verbo Encarnado!, recordad aquella Santa Pasión que abrazasteis por nosotros para cumplir el Divino Plan de Reconciliación de Dios con su criatura. Recordad, Señor, Vuestra Última Cena, cuando rodeado de Vuestros discípulos y después de haberles lavado los pies, les disteis Vuestro Precioso Cuerpo y Sangre. Recordad también cuando tuvisteis que consolarlos al anunciarles Vuestra ya próxima Pasión.
+
+Fue en el Huerto de los Olivos, ¡oh, Señor!, donde se escenificaron los peores momentos de Vuestra Sagrada Pasión: porque fuisteis invadido por la más infinita de las tristezas y por la más dolorosa de las amarguras, que Os llevaron a exclamar, lleno de Horror y de Angustia: "¡Mi Alma está triste hasta la muerte!"... Tres Horas duró Vuestra Agonía en aquel jardín, y todo el Miedo, Angustia y Dolor que padecisteis allí ¡fueron tan grandes! que Os causaron sudar Sangre copiosamente. Aquello escapaba a toda descripción, hasta tal punto que sufristeis más allí que en el resto de Vuestra Pasión, porque ante Vuestros Divinos Ojos desfilaron aquellas terribles visiones de los pecados que se cometieron desde Adán y Eva hasta aquellos mismos instantes, los pecados que se estaban cometiendo en aquellos momentos por toda la faz de la Tierra y los que se cometerían en el futuro, ¡siglos enteros!, hasta la consumación de los Tiempos.
+
+Pero, ¡oh, Amor que todo lo vence!, a pesar de Vuestro Temor humano, así contestasteis a Vuestro Padre: "¡No se haga mi voluntad, sino la Tuya!" E inmediatamente Vuestro Padre envió a aquel Precioso Ángel para confortarOs. Tres veces orasteis, y al final llegó Vuestro discípulo traidor, Judas. ¡Cuánto Os dolió aquello!
+
+Fuisteis arrestado por el pueblo de aquella nación que Vos mismo habíais escogido y exaltado. Tres jueces Os juzgaron, falsos testigos Os acusaron, cometiendo el acto más injusto de la historia de la Humanidad, ¡condenando a muerte a su Autor y Redentor!, ¡a Aquel que venía a regalarnos la Vida Eterna!
+
+Y Os despojaron de Vuestras vestiduras y Os cubrieron los Ojos... E inmediatamente aquellos soldados romanos comenzaron a abofetearOs y a llenarOs de salivazos. Golpes llovieron contra Vuestro Delicado Cuerpo, y Os retaban a que les dijerais quién era el que Os lo hacía. De repente, aquella Corona de Espinas Os la incrustaron, mutilando Vuestra Cabeza de mala manera, ¡rompiendo Carne, Venas y Nervios! Y para completar la mofa a Vuestra Condición de Rey, Os dieron un cetro: una vulgar caña que colocaron en Vuestras Sagradas Manos.
+
+¡Oh, Sublime Enamorado de nuestras almas!, recordad también cuando Os ataron a la columna. ¡Cómo Os flageló aquella gente!... No quedó lugar alguno en Vuestro Maravilloso Cuerpo que no quedara destrozado bajo los golpes de los látigos. Otro cuerpo humano hubiese muerto con menos golpes. La escena era terrible: ¡Huesos y Costillas podían verse! ¡Cuánta furia desatada contra el Hombre-Dios!
+
+¡Oh, Jesús mío!, en memoria de aquellos crueles Tormentos que padecisteis por nosotros antes de la Crucifixión, concededme, antes de morir, un verdadero arrepentimiento de mis pecados, que pueda satisfacer por ellos, haga una santa Confesión, Os reciba en la Santísima Eucaristía y, así alimentada mi alma, pueda volar hacia Vos.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p2", title:"SEGUNDA ORACIÓN", text:`¡Oh, Salud y Alimento de mi alma, Libertad Verdadera de ángeles y santos!, ¡Paraíso de Delicias!, recordad el Horror y la Tristeza que sufristeis, camino del lugar donde Os aguardaban una cruz, cuatro clavos y los verdugos, cuando toda aquella turba se apretujaba a Vuestro Paso y Os golpeaba e insultaba impunemente, haciéndoOs víctima de las más espantosas crueldades. Pero más Os dolía su ingratitud que los golpes que Os infligían, pues era precisamente por ellos y por todo el Género Humano, que llevabais aquella Cruz sobre Vuestros Hombros destrozados.
+
+Por todos aquellos Tormentos y Ultrajes, y por las blasfemias proferidas en contra de Vos, Os ruego, ¡oh, Dueño de mi alma!, que me libréis de mis enemigos, visibles e invisibles, y que bajo Vuestra Protección logre tal perfección y santidad que merezca entrar con Vos en Vuestro Reino.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p3", title:"TERCERA ORACIÓN", text:`¡Oh, Dueño de nuestra existencia!, Vos, que siendo el Creador del Universo, del Cielo y de la Tierra, de ángeles y hombres, a quien nada puede abarcar ni limitar, y que todo lo envolvéis y sostenéis con Vuestro Amoroso Poder, sin embargo Os dejasteis matar por Vuestra Obra Maestra, el Hombre, para justificarlo ante Vos mismo.
+
+Recordad cada Dolor sufrido, cada Tormento soportado por nuestro Amor, cuando los judíos con enormes clavos taladraron Vuestras Sagradas Manos y Pies. ¡Qué espantosa escena se produjo cuando, con indescriptible crueldad, Vuestro Cuerpo tuvo que ser estirado sobre la Cruz para que Vuestras Manos y Pies llegaran hasta los agujeros previamente abiertos en el madero! ¡Con cuánta furia agrandaron aquellas Heridas! ¡Cómo agregaron dolor al Dolor cuando tuvieron que estirar Vuestros Sagrados Miembros violentamente en todas direcciones!, ¡oh, Varón de Dolores!
+
+Recordad cuando Vuestros Músculos y Tendones eran estirados sin misericordia, Vuestras Venas se rompían, Vuestra Piel Virginal se desgarraba horriblemente y Vuestros Huesos eran dislocados.
+
+¡Oh, Cordero Divino!, en memoria de todo lo ocurrido en la Colina del Gólgota, Os ruego me concedáis la Gracia de amarOs y honrarOs cada día más y más.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p4", title:"CUARTA ORACIÓN", text:`¡Oh, Divino Mártir de Amor!, ¡oh, Médico Celestial!, que Os dejasteis suspender en la Cruz para que por Vuestras Heridas, las nuestras fueran curadas. Recordad cada una de aquellas Heridas y la tremenda debilidad de Vuestros Miembros, que fueron distendidos hasta tal punto que jamás ha habido dolor semejante al Vuestro. Desde la Cabeza a los Pies erais todo Llaga, todo Dolor, todo Sufrimiento; erais una masa rota y sanguinolenta. Y aun así llegasteis, para sorpresa de Vuestros verdugos, a suplicar a Vuestro Padre Eterno, Perdón para ellos diciéndoLe: ¡Padre, perdónalos, porque no saben lo que hacen!
+
+¡Oh, Cristo Bendito!, en memoria de esta gran Misericordia que tuvisteis -ya que muy bien pudisteis lanzar a todo aquel mundo malvado a los abismos infernales con un solo Acto de Vuestra Poderosa Voluntad-, por aquella tan grande Misericordia que superó a Vuestra Divina Justicia, concededme una contrición perfecta y la remisión total de mis pecados, desde el primero hasta el último, y que jamás vuelva a ofenderOs.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p5", title:"QUINTA ORACIÓN", text:`¡Oh, Jesús!, ¡oh, Esplendor de la Eternidad!, recordad cuando contemplasteis en la Luz de Vuestra Divinidad las almas de los predestinados, que serían rescatados por los Méritos de Vuestra Sagrada Pasión. También visteis aquella tremenda multitud que sería condenada por sus pecados. ¡Cuánto Os quejasteis por ellos! Os compadecisteis, ¡oh, Buen Jesús!, hasta de aquellos réprobos, de aquellos desafortunados pecadores que no se lavarían con Vuestra Sangre ni se alimentarían con Vuestra Carne Eucarística.
+
+Por Vuestra Infinita Compasión y Piedad, y acordándoOs de Vuestra Promesa al buen ladrón arrepentido, al decirle que aquel mismo día estaría con Vos en el Paraíso, ¡oh, Salud y Alimento de nuestra alma!, mostradme esta misma Misericordia en la Hora de mi muerte.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p6", title:"SEXTA ORACIÓN", text:`¡Oh, Rey muy amado y deseado por mi corazón!, acordaOs del Dolor que sufristeis cuando, desnudo y como un criminal común y corriente, fuisteis clavado y elevado en la Cruz. ¡Cómo Os dolió ver que Vuestros familiares y amigos desertaban! Pero allí estaba Vuestra Muy Amada Madre y Vuestro Discípulo Juan, que permanecieron con Vos hasta Vuestro Último Suspiro, no importando que su naturaleza humana desmayando estuviera. Y, para colmo de Vuestro Inmenso Amor por nosotros, nos hicisteis aquel Precioso Regalo: ¡nos disteis a María como Madre! ¡Cuánto Os debemos, Salvador nuestro, por este Sublime Regalo! Solo tuvisteis que decir a María: “¡Mujer, he aquí a tu hijo!”, y a Juan: “!He aquí a tu Madre!”
+
+Os suplico, ¡oh, Rey de la Gloria!, por la Espada de Dolor que entonces atravesó el alma de Vuestra Santísima e Inmaculada Madre, que Os compadezcáis de mí en todas mis aflicciones y tribulaciones, tanto corporales como espirituales, y que me asistáis en cada prueba, especialmente en la Hora de mi muerte.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p7", title:"SÉPTIMA ORACIÓN", text:`¡Oh, Rey de Reyes!, ¡Fuente de Compasión que jamás se agota!, recordad cuando sentisteis aquella tremenda Sed por las almas, que Os llevó a exclamar desde la Cruz: "¡Tengo Sed!" Sí, no solamente teníais Sed física, sino Sed insaciable por la Salvación de la Raza Humana.
+
+Por este gesto de Amor por nosotros, Os ruego, ¡oh, Prisionero de nuestro amor!, que inflaméis mi corazón con el deseo de tender siempre hacia la perfección en todos mis actos, que extingáis en mí la concupiscencia de la carne y los deseos de placeres mundanos.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p8", title:"OCTAVA ORACIÓN", text:`¡Oh, constante Dulzura nuestra!, ¡oh, Deleite diario de nuestro espíritu!, por el sabor tan amargo de aquella hiel y vinagre que Os dieron a probar en lugar de agua, para aplacar Vuestra Sed física, Os suplico que aplaquéis mi sed por Vuestra Vivificadora Sangre y mi hambre por Vuestra Redentora Carne, ahora y siempre, y que no me falten en la Hora de mi muerte.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p9", title:"NOVENA ORACIÓN", text:`¡Oh, Jesús, Virtud Real y Gozo del alma!, acordaOs del Dolor que sentisteis, sumergido en un Océano de Amargura, al acercarse la Muerte. Insultado y ultrajado por Vuestros verdugos, clamasteis en alta voz que habíais sido abandonado por Vuestro Padre Celestial, diciéndoLe: “Dios mío, Dios mío, ¿por qué me has abandonado?” Por aquella Angustia que padecisteis en aquellos momentos finales de Vuestra Pasión, Os ruego, ¡oh, nuestro Salvador!, que no me abandonéis durante los terrores y dolores de mi muerte.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p10", title:"DÉCIMA ORACIÓN", text:`¡Oh, Jesús!, que sois Principio y Fin de todo lo creado, Virtud, Luz y Verdad, acordaOs de que por causa nuestra fuisteis sumergido en un Abismo de Penas, sufriendo Dolor en todo Vuestro Santísimo Cuerpo. En consideración a la enormidad de tanta Llaga que Os hicimos los hombres, enseñadme a guardar por puro amor a Vos todos Vuestros Mandamientos, que son Camino de Vuestra Ley Divina, amplio y agradable para aquellos que Os aman.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p11", title:"UNDÉCIMA ORACIÓN", text:`¡Oh, Jesús mío, Abismo Insondable de Misericordia!, Os ruego, en memoria de Vuestras Heridas, las cuales penetraron hasta la Médula de Vuestros Huesos y hasta lo más profundo de Vuestro Ser, ¡que me apartéis para siempre del pecado!, ¡que no Os ofenda más! Reconozco con bochorno que soy un miserable pecador y que Os he ofendido ¡tantas veces! que temo que Vuestra Divina Justicia me condene.
+
+No obstante, acudo presuroso a Vuestra Misericordia Infinita para que me escondáis urgentemente en Vuestras Preciosas Llagas. Y así, ocultado de Vuestro indignado Rostro, pueda Vuestro Amante Corazón una vez más lavar mis culpas con Vuestra Sangre Liberadora. De esa forma, Redentor nuestro, Vuestro Enojo e Indignación cesarán de inmediato. ¡Gracias, Señor!
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p12", title:"DUODÉCIMA ORACIÓN", text:`¡Oh, Jesús, Eterna Verdad, Símbolo de la Perfecta Caridad y de la Unidad!, Os suplico que Os acordéis de aquella multitud de laceraciones, de aquellas horribles Heridas que Os hicimos la Humanidad pecadora que queríais salvar. Estabais hecho un guiñapo humano, enrojecido por Vuestra propia Sangre. ¡Qué inmenso e intenso Dolor padecisteis en Vuestra Carne Virginal por Amor a nosotros!, ¡oh, Dulzura Infinita! ¿Qué podéis hacer que no hayáis ya hecho por nosotros? Nada falta, todo lo habéis cumplido.
+
+Ayudadme, ¡oh, Señor!, a tener siempre presente ante los ojos de mi espíritu un fiel recuerdo de Vuestra Pasión, para que el Fruto de Vuestros Sufrimientos se vea continuamente renovado en mi alma y para que Vuestro Amor se agrande en cada momento más y más en mi corazón, hasta que llegue aquel Feliz Día en que Os vea en el Cielo y sea Uno con Vos, que sois el Tesoro y Suma Total de todo gozo y bondad.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p13", title:"DÉCIMA TERCERA ORACIÓN", text:`¡Oh, Dulce Consuelo de mi alma, Maravilloso Liberador, Rey Inmortal e Invencible!, recordad cuando, inclinando Vuestra Adorable Cabeza, toda desfigurada por los golpes, la Sangre y el polvo del camino, exclamasteis: "Todo está consumado"... Toda Vuestra Fuerza, mental y física, se agotó completamente.
+
+Por este Gran Sacrificio y por las Angustias y Tormentos que padecisteis antes de morir, Os ruego, ¡oh, Buen Jesús!, que tengáis Misericordia de mí en la Hora de mi muerte, cuando mi mente esté tremendamente perturbada y mi alma sumergida en inquietudes y angustias. Que no tema nada, que Os tenga a Vos a mi lado y dentro de mi ser.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p14", title:"DÉCIMA CUARTA ORACIÓN", text:`¡Oh, Doliente Jesús!, ¡oh, incomprensible Segunda Persona de la Trinidad, Esplendor y Figura de Su Esencia!, recordad cuando con gran Voz entregasteis Vuestra Alma a Vuestro Padre Celestial, diciéndoLe: "¡Padre, en Tus Manos encomiendo mi espíritu!" Vuestro Cuerpo estaba despedazado y Vuestro Corazón destrozado, pero Vuestras Entrañas de Misericordia quedaron abiertas para redimirnos. Así expiraste, ¡oh, Amor Infinito!
+
+Por Vuestra Dolorosa Muerte Os suplico, ¡oh, Rey de Santos y Ángeles!, que me confortéis y ayudéis a resistir al mundo con sus errores, a Satanás con sus perfidias y a la carne con sus vicios, para que así, muerto a los enemigos de mi alma, viva solamente para Vos. Por eso Os ruego, ¡oh, Dulce Redentor y Salvador!, que a la Hora de mi muerte recibáis mi pobre alma desterrada, que regresa a Vos.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+
+    { key:"p15", title:"DÉCIMA QUINTA ORACIÓN", text:`¡Oh, Vencedor de la Muerte!, ¡Vid Verdadera y Fructífera!, recordad aquel torrente de Sangre que brotó de cada Parte de Vuestro Bendito Cuerpo, igual que la uva exprimida en el lagar.
+
+Desde el lugar de la Flagelación y a través de las calles de Jerusalén, por toda aquella Vía Dolorosa hasta la Colina Sagrada, Vuestra Sangre derramada escribía las Bellas Páginas de la Historia del Corazón que más nos ama...¡El Vuestro! Recordad cómo la Tierra, agradecida pero a la vez espantada, recibía Vuestra Preciosa Sangre. Toda la Naturaleza, de horror temblaba, y los cielos se estremecían; los Ángeles y hasta los demonios se sorprendían ante ¡aquella increíble escena! ¡Todo un Dios moría! ¿Qué era aquello? ¿Qué sucedía? Aquel primer Viernes Santo, ¡oh, Jesús!, ¡abríais el Cielo para la Humanidad pecadora!
+
+Por tres largas Horas Vuestro Cuerpo colgó de la Cruz. Presentabais un aspecto doliente, triste, todo lleno de Dolor. Vuestra Sangre: aún manando, recorriendo aquella que ya se había secado, que ya se había coagulado. Y a todo esto se adhirió el polvo y la tierra del camino....
+
+Qué tristeza y dolor padecieron María y Juan al contemplar Vuestros Cabellos y Barbas, que ahora daban la impresión de que estaban compuestos de alambres, llenos de Sangre y de tierra. Vuestros Oídos y Nariz, tupidos estaban de Sangre. ¡Hasta Vuestros Ojos y Boca sangraban! En verdad que todos Vuestros Sentidos fueron atrozmente atormentados.
+
+Así inclinasteis la Cabeza y entregasteis Vuestro Espíritu.... Entonces vino Longinos y perforó Vuestro Costado, con tanta violencia que la punta de la lanza casi sale por el otro Costado. Vuestro Corazón, Os lo desgarraron, ¡oh, Jesús!, ese Corazón que ¡tanto nos ama! Y de allí brotó Sangre y Agua, hasta no quedar en Vuestro Cuerpo gota alguna. Vuestro Cuerpo era cual bulto colgado, como un haz de mirra elevado en lo alto de la Cruz. La muy fina y delicada Carne Vuestra fue destrozada, la Sustancia de Vuestro Cuerpo fue marchitada, y desecada la Médula de Vuestros Huesos. Fue entonces que el Sol y las estrellas negaron su luz, hubo terremotos, y la Naturaleza y los Elementos dieron amplio testimonio de que Aquel que negaron ¡era el Hijo de Dios!
+
+Por esta Amarga Pasión y por la Efusión de Vuestra Divina Sangre, Os suplico, ¡oh, Dulcísimo Jesús!, que recibáis mi alma cuando esté sufriendo en la agonía de mi muerte.
+
+¡Oh, Maravillosa Realidad, escándalo para los infieles, Gozo indescriptible para los que Os amamos!, ese Vuestro Infinito Sacrificio pagó el Rescate, y al resucitar y ascender gloriosamente al Cielo ¡dejasteis bien abiertas las Puertas para aquellos que quisieran seguirOs! ¡Oh, Señor!, por Vuestra Amarga Pasión y Preciosa Sangre Os ruego traspaséis mi corazón para que mis lágrimas de amor, adoración y penitencia sean mi alimento noche y día. Haced que me convierta totalmente a Vos, que mi corazón sea Vuestro perpetuo Lugar de Reposo, que mis conversaciones Os sean siempre agradables, y que al final de mi vida merezca que grabéis, ¡oh, Dios de Amor!, el Sello de Vuestra Divinidad en mi alma, para que tanto el Padre como el Espíritu Santo Os vean bien reproducido en mí y poder así ser contado entre Vuestros Santos para que Os alabe para siempre por toda la Eternidad.
+
+Así sea.
+
+(Padre Nuestro, Ave María y Gloria)` },
+  ];
+
+  /**********************
+   * STORAGE
+   **********************/
+  const STORE_KEY = "brigida365_visual_clean_v2";
+  const KEYS = PRAYERS.map(p => p.key);
+
+  const DOW = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
+  const MONTHS = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+  const $ = (id)=>document.getElementById(id);
+  const pad = (n)=>String(n).padStart(2,"0");
+  const ymd = (d)=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  const parseYMD = (s)=>{ const [y,m,dd]=s.split("-").map(Number); return new Date(y, m-1, dd); };
+  const todayYMD = ()=> ymd(new Date());
+  const isoNow = ()=> new Date().toISOString();
+  const addDays = (date, n)=>{ const d = new Date(date); d.setDate(d.getDate()+n); return d; };
+  const startOfMonth = (d)=> new Date(d.getFullYear(), d.getMonth(), 1);
+  const endOfMonth = (d)=> new Date(d.getFullYear(), d.getMonth()+1, 0);
+  const monFirstIndex = (date)=>{ const js = date.getDay(); return (js + 6) % 7; };
+
+  function loadState(){
+    const raw = localStorage.getItem(STORE_KEY);
+    if(!raw){
+      const t = todayYMD();
+      return {
+        startDate: t,   // se usa solo como fallback si no hay ningún día completo aún
+        today: t,
+        currentIndex: -1, // -1 = INTRO
+        doneToday: {},    // solo para HOY (ayuda visual)
+        days: {}          // historial: days[ymd] = { marks:{p1:true..}, registeredAtISO:string|null }
+      };
+    }
+    try { return JSON.parse(raw); }
+    catch { localStorage.removeItem(STORE_KEY); return loadState(); }
+  }
+  function saveState(){ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
+
+  function ensureDay(dateStr){
+    if(!state.days[dateStr]) state.days[dateStr] = { marks:{}, registeredAtISO:null };
+    return state.days[dateStr];
+  }
+  function getDay(dateStr){ return state.days[dateStr] || null; }
+  function countMarks(marks){
+    let c = 0;
+    for(const k of KEYS) if(marks?.[k]) c++;
+    return c;
+  }
+  function isComplete(dateStr){
+    const rec = getDay(dateStr);
+    return rec ? (countMarks(rec.marks) === 15) : false;
+  }
+  function markFullDay(dateStr){
+    const rec = ensureDay(dateStr);
+    for(const k of KEYS) rec.marks[k] = true;
+    rec.registeredAtISO = isoNow(); // fecha en la que se registró (puede ser posterior)
+    saveState();
+  }
+  function clearDay(dateStr){
+    delete state.days[dateStr];
+    saveState();
+  }
+
+  function setTodayIfNeeded(){
+    const t = todayYMD();
+    if(state.today !== t){
+      state.today = t;
+      state.currentIndex = -1;
+      state.doneToday = {};
+      saveState();
+    }
+  }
+
+  // ✅ Inicio real: primer día marcado como completo
+  function firstDoneDay(){
+    return Object.keys(state.days)
+      .filter(ds => isComplete(ds))
+      .sort()[0] || null;
+  }
+
+  // ✅ Racha: cuenta desde el primer día completo, hasta que falte uno
+  function computeChallenge(){
+    const firstDone = firstDoneDay();
+    if(!firstDone){
+      return { streak: 0, brokenOn: null, done365: false, startReal: null };
+    }
+
+    const start = parseYMD(firstDone);
+    let streak = 0;
+    let brokenOn = null;
+
+    for(let i=0;i<365;i++){
+      const ds = ymd(addDays(start,i));
+      if(isComplete(ds)) streak++;
+      else { brokenOn = ds; break; }
+    }
+    return { streak, brokenOn, done365: streak>=365, startReal: firstDone };
+  }
+
+  /**********************
+   * RANGO CALENDARIO: 1 AÑO ATRÁS y 1 AÑO ADELANTE
+   **********************/
+  const TODAY = new Date();
+  const MIN_DATE = new Date(TODAY.getFullYear() - 1, TODAY.getMonth(), 1);
+  const MAX_DATE = new Date(TODAY.getFullYear() + 1, TODAY.getMonth() + 1, 0);
+
+  /**********************
+   * UI
+   **********************/
+  let state = loadState();
+  setTodayIfNeeded();
+
+  let view = "hoy";
+  let calMonth = new Date();
+  let modalDateStr = null;
+
+  function setView(v){
+    view = v;
+    $("viewHoy").style.display = (v==="hoy") ? "block" : "none";
+    $("viewCal").style.display = (v==="cal") ? "block" : "none";
+    $("tabHoy").classList.toggle("active", v==="hoy");
+    $("tabCal").classList.toggle("active", v==="cal");
+    renderAll();
+  }
+
+  function renderToday(){
+    const t = todayYMD();
+    $("todayLine").textContent = `Fecha: ${t}`;
+
+    const ch = computeChallenge();
+
+    // ✅ Inicio visual y real (si existe)
+    $("startDate").textContent = ch.startReal || state.startDate;
+
+    $("streak").textContent = ch.streak;
+
+    const doneCount = KEYS.filter(k=>state.doneToday[k]).length;
+    $("todayCount").textContent = doneCount;
+
+    if(ch.done365){
+      $("pillProgress").className = "pill ok";
+      $("pillProgress").textContent = "🎉 Meta completada";
+    } else if(ch.brokenOn){
+      $("pillProgress").className = "pill";
+      $("pillProgress").textContent = "Revisar calendario";
+    } else if(ch.startReal){
+      $("pillProgress").className = "pill";
+      $("pillProgress").textContent = "En progreso";
+    } else {
+      $("pillProgress").className = "pill";
+      $("pillProgress").textContent = "Empieza marcando un día ✅";
+    }
+
+    // círculo HOY
+    $("meterNum").textContent = doneCount;
+    const deg = Math.round((doneCount / 15) * 360);
+    $("meterRing").style.background = `conic-gradient(var(--accent) ${deg}deg, rgba(255,255,255,.10) 0deg)`;
+    $("meterMsg").textContent = (doneCount === 15)
+      ? "✅ Ya puedes marcar HOY como completo."
+      : "Marca las 15 oraciones y luego “Marcar HOY como completo”.";
+
+    if(state.currentIndex === -1){
+      $("prayerTitle").textContent = INTRO.title;
+      $("prayerMeta").textContent = "";
+      $("prayerText").textContent = INTRO.text;
+
+      $("pillState").className = "pill";
+      $("pillState").textContent = "Inicio";
+
+      $("toggle").disabled = true;
+      $("toggle").textContent = "Marcar esta oración";
+    } else {
+      const p = PRAYERS[state.currentIndex];
+      const done = !!state.doneToday[p.key];
+
+      $("prayerTitle").textContent = p.title;
+      $("prayerMeta").textContent = `Oración ${state.currentIndex+1}/15`;
+      $("prayerText").textContent = p.text;
+
+      $("pillState").className = "pill " + (done ? "ok" : "");
+      $("pillState").textContent = done ? "✅ Hecha" : "Actual";
+
+      $("toggle").disabled = false;
+      $("toggle").textContent = done ? "Marcar pendiente" : "Marcar esta oración";
+    }
+
+    $("prev").disabled = (state.currentIndex === -1);
+    $("next").disabled = (state.currentIndex === 14);
+    $("markDay").disabled = (doneCount !== 15);
+  }
+
+  function renderCalendar(){
+    $("calTitle").textContent = `${MONTHS[calMonth.getMonth()]} ${calMonth.getFullYear()}`;
+
+    const monthStart = startOfMonth(calMonth);
+    const monthEnd = endOfMonth(calMonth);
+    $("calPrev").disabled = monthStart <= MIN_DATE;
+    $("calNext").disabled = monthEnd >= MAX_DATE;
+
+    const mStart = startOfMonth(calMonth);
+    const mEnd = endOfMonth(calMonth);
+    let ok = 0, active = 0;
+    for(let d=new Date(mStart); d<=mEnd; d=addDays(d,1)){
+      if(d < MIN_DATE || d > MAX_DATE) continue;
+      active++;
+      if(isComplete(ymd(d))) ok++;
+    }
+    $("monthSummary").textContent = `Este mes: ${ok}/${active} días ✅ Hecho`;
+
+    $("dow").innerHTML = "";
+    DOW.forEach(x=>{
+      const el = document.createElement("div");
+      el.textContent = x;
+      $("dow").appendChild(el);
+    });
+
+    const grid = $("calGrid");
+    grid.innerHTML = "";
+
+    const firstIdx = monFirstIndex(mStart);
+    const daysInMonth = mEnd.getDate();
+    const today = todayYMD();
+
+    // Para pintar "Falta" solo si está dentro del bloque del reto (365 días) desde el inicio real
+    const ch = computeChallenge();
+    const startReal = ch.startReal ? parseYMD(ch.startReal) : null;
+    const endReal = startReal ? addDays(startReal, 364) : null;
+
+    for(let i=0;i<firstIdx;i++){
+      const blank = document.createElement("div");
+      blank.className = "dayCell muted";
+      blank.style.visibility = "hidden";
+      grid.appendChild(blank);
+    }
+
+    for(let day=1; day<=daysInMonth; day++){
+      const date = new Date(calMonth.getFullYear(), calMonth.getMonth(), day);
+      const ds = ymd(date);
+      const outOfRange = (date < MIN_DATE) || (date > MAX_DATE);
+
+      const cell = document.createElement("div");
+      cell.className = "dayCell" + (outOfRange ? " muted" : "");
+      if(ds === today) cell.classList.add("today");
+
+      const num = document.createElement("div");
+      num.className = "dayNum";
+      num.textContent = day;
+      cell.appendChild(num);
+
+      if(isComplete(ds)){
+        const rec = getDay(ds);
+        const reg = rec?.registeredAtISO ? rec.registeredAtISO.slice(0,10) : ds;
+        const late = reg !== ds;
+        const tag = document.createElement("div");
+        tag.className = "dayTag " + (late ? "late" : "ok");
+        tag.textContent = late ? "✅ Hecho (tarde)" : "✅ Hecho";
+        cell.appendChild(tag);
+      } else {
+        // Mostrar "Falta" solo si ya hay inicio real y el día está dentro del rango del reto y no es futuro
+        if(startReal && endReal && (date >= startReal) && (date <= endReal) && (ds <= today)){
+          const tag = document.createElement("div");
+          tag.className = "dayTag miss";
+          tag.textContent = "Falta";
+          cell.appendChild(tag);
+        }
+      }
+
+      if(!outOfRange){
+        cell.onclick = ()=> openModal(ds);
+      }
+
+      grid.appendChild(cell);
+    }
+  }
+
+  function openModal(dateStr){
+    modalDateStr = dateStr;
+
+    const today = todayYMD();
+    const isToday = (dateStr === today);
+
+    const rec = getDay(dateStr);
+    const marks = rec ? countMarks(rec.marks) : 0;
+    const complete = (marks === 15);
+
+    $("modalTitle").textContent = `Día ${dateStr}`;
+    $("modalDate").textContent = dateStr;
+    $("modalState").textContent = complete ? "✅ Hecho" : "Falta";
+    $("modalReg").textContent = rec?.registeredAtISO ? rec.registeredAtISO.slice(0,10) : "—";
+
+    $("onlyTodayBlock").style.display = isToday ? "block" : "none";
+    $("notTodayHint").style.display = isToday ? "none" : "block";
+
+    if(isToday){
+      const g = $("grid15");
+      g.innerHTML = "";
+      for(let i=0;i<15;i++){
+        const key = KEYS[i];
+        const on = !!state.doneToday[key];
+
+        const chip = document.createElement("div");
+        chip.className = "pchip" + (on ? " on" : "");
+        chip.textContent = `${i+1}`;
+
+        chip.onclick = ()=>{
+          state.doneToday[key] = !state.doneToday[key];
+          saveState();
+          openModal(dateStr);
+          renderAll();
+        };
+
+        g.appendChild(chip);
+      }
+    }
+
+    $("modalBg").style.display = "flex";
+  }
+
+  function closeModal(){
+    $("modalBg").style.display = "none";
+    modalDateStr = null;
+  }
+
+  function renderAll(){
+    setTodayIfNeeded();
+    renderToday();
+    if(view === "cal") renderCalendar();
+  }
+
+  // Tabs
+  $("tabHoy").onclick = ()=> setView("hoy");
+  $("tabCal").onclick = ()=> setView("cal");
+  $("goCal").onclick = ()=> setView("cal");
+
+  // Navegación lectura
+  $("prev").onclick = ()=>{
+    state.currentIndex = Math.max(-1, state.currentIndex - 1);
+    saveState(); renderAll();
+  };
+  $("next").onclick = ()=>{
+    state.currentIndex = Math.min(14, state.currentIndex + 1);
+    saveState(); renderAll();
+  };
+
+  // Marcar oración HOY
+  $("toggle").onclick = ()=>{
+    if(state.currentIndex === -1) return;
+    const key = PRAYERS[state.currentIndex].key;
+    state.doneToday[key] = !state.doneToday[key];
+    saveState(); renderAll();
+  };
+
+  // Marcar HOY como completo (solo si 15/15)
+  $("markDay").onclick = ()=>{
+    const doneCount = KEYS.filter(k=>state.doneToday[k]).length;
+    if(doneCount !== 15) return;
+    markFullDay(todayYMD());
+    alert("✅ HOY marcado como completado.");
+    renderAll();
+  };
+
+  // Reiniciar marcas HOY
+  $("clearToday").onclick = ()=>{
+    state.doneToday = {};
+    state.currentIndex = -1;
+    saveState(); renderAll();
+  };
+
+  // Navegación calendario
+  $("calPrev").onclick = ()=>{
+    calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth()-1, 1);
+    renderAll();
+  };
+  $("calNext").onclick = ()=>{
+    calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth()+1, 1);
+    renderAll();
+  };
+
+  // Modal
+  $("modalClose").onclick = closeModal;
+  $("modalBg").onclick = (e)=>{ if(e.target.id === "modalBg") closeModal(); };
+
+  // Marcar día completo en modal (cualquier día)
+  $("modalMarkFull").onclick = ()=>{
+    if(!modalDateStr) return;
+    markFullDay(modalDateStr);
+
+    // si es HOY, también marca los chips de HOY como hechos
+    if(modalDateStr === todayYMD()){
+      for(const k of KEYS) state.doneToday[k] = true;
+      saveState();
+    }
+    openModal(modalDateStr);
+    renderAll();
+  };
+
+  // Quitar marca del día
+  $("modalClear").onclick = ()=>{
+    if(!modalDateStr) return;
+    clearDay(modalDateStr);
+
+    if(modalDateStr === todayYMD()){
+      state.doneToday = {};
+      saveState();
+    }
+    openModal(modalDateStr);
+    renderAll();
+  };
+
+  // Reiniciar reto completo
+  $("resetAll").onclick = ()=>{
+    if(confirm("¿Seguro? Esto borra todo el historial y reinicia el reto desde hoy.")){
+      localStorage.removeItem(STORE_KEY);
+      state = loadState();
+      calMonth = new Date();
+      setView("hoy");
+    }
+  };
+
+    // Init
+  setView("hoy");
+</script>
+
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js");
+  }
+</script>
+
+</body>
+</html>
+
